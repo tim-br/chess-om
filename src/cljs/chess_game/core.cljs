@@ -7,24 +7,24 @@
 (defonce app-state (atom {:text "hello world"}))
 
 ;; (defn contacts-view [data owner]
-;;   (reify
-;;     om/IInitState
-;;     (init-state [_]
-;;       {:vect [[1 1 1]
+;;    (reify
+;;      om/IInitState
+;;      (init-state [_]
+;;        {:vect [[1 1 1]
 ;;               [1 1 1]
-;;               [2 3 4]]})
-;;     om/IRenderState
-;;     (render-state [_ state]
-;;                   (apply dom/div nil
-;;                          (for [row (:vect state)]
-;;                            (dom/p nil (str row)))))))
+;;                [2 3 4]]})
+;;      om/IRenderState
+;;      (render-state [_ state]
+;;                    (apply dom/div nil
+;;                           (for [row (:vect state)]
+;;                             (dom/p nil (str row)))))))
 
 ;; (defn foo [data owner]
-;;   (reify
-;;     om/IRender
-;;     (render [this]
-;;             (dom/div nil
-;;               (dom/p nil "yo")))))
+;;    (reify
+;;      om/IRender
+;;      (render [this]
+;;              (dom/div nil
+;;                (dom/p nil "yo")))))
 
 (defn x-cord
   [pair]
@@ -82,6 +82,10 @@
                              {:state {:pawn (if (= x 1) true)}
                               :opts {:pos [x y]}}))))))))
 
+(defn start-game
+  []
+  (js/console.log "start game"))
+
 (defn main []
   (om/root
     (fn [app owner]
@@ -93,11 +97,9 @@
         (render [_]
                 (dom/div nil
                          (dom/p nil(:text app))
-                         (om/build contacts-view nil)
                          (om/build chess-board nil)
                          (dom/button #js {:onClick #(start-game)}
-                                     "Start Game")
-                         (om/build foo nil)))))
+                                     "Start Game")))))
     app-state
     {:target (. js/document (getElementById "app"))}))
  
